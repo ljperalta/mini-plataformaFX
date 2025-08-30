@@ -56,7 +56,11 @@ function cargarSelector() {
   });
 }
 
-// Manejo de formulario
+// Inicializar
+renderTabla();
+cargarSelector();
+setInterval(actualizarPrecios, 2000);
+//////////////////////////////////////envio de data////////////////////////////////////////////////
 document.getElementById("operationForm").addEventListener("submit", function(e){
   e.preventDefault();
   
@@ -65,23 +69,22 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
     target: document.getElementById("targetPrice").value,
     qty: document.getElementById("quantity").value,
     side: document.getElementById("operationType").value,
-    timestamp: new Date().toLocaleString()
+    timestamp: new Date().toISOString()
   };
 
-  // En esta parte luego se manda por WebSocket
-  console.log("Enviando operación:", operation);
+  if (socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(operation));
+    console.log("Operación enviada:", operation);
+  } else {
+    console.warn("WebSocket no conectado. No se envió la operación.");
+  }
 
-  // Mostrar en log
   const logEntry = document.createElement("div");
   logEntry.className = "alert alert-secondary py-2 mb-2";
   logEntry.innerHTML = `<strong>${operation.side.toUpperCase()}</strong> ${operation.qty} ${operation.symbol} @ ${operation.target} <br><small>${operation.timestamp}</small>`;
   operationsLog.prepend(logEntry);
 });
 
-// Inicializar
-renderTabla();
-cargarSelector();
-setInterval(actualizarPrecios, 2000);
 
 
 // const instrumentos = [

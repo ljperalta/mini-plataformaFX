@@ -81,7 +81,7 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
 
   const logEntry = document.createElement("div");
   logEntry.className = "alert alert-secondary py-2 mb-2";
-  logEntry.innerHTML = `<strong>${operation.side.toUpperCase()}</strong> ${operation.qty} ${operation.symbol} @ ${operation.target} <br><small>${operation.timestamp}</small>`;
+  logEntry.innerHTML = `<strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
   operationsLog.prepend(logEntry);
 });
 

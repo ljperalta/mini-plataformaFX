@@ -58,6 +58,14 @@
     </div>
   </div>
 
+  <div class="card shadow">
+    <div class="card-header bg-info text-white">Mensajes informativos del servidor</div>
+      <div class="card-body" id="infoLog" style="max-height:200px; overflow-y:auto;">
+        <p class="text-muted">Sin mensajes por el momento.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
   <div id="liveToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">

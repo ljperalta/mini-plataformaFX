@@ -90,7 +90,7 @@ function cargarSelector() {
 // Inicializar
 renderTabla();
 cargarSelector();
-setInterval(actualizarPrecios, 2000);
+setInterval(actualizarPrecios, 1000);
 //////////////////////////////////////envio de data////////////////////////////////////////////////
 document.getElementById("operationForm").addEventListener("submit", function(e){
   e.preventDefault();
@@ -124,71 +124,3 @@ function mostrarToast(msg, type="primary") {
     const toast = new bootstrap.Toast(toastEl);
     toast.show();
 }
-
-
-// const instrumentos = [
-//   { id: 1, symbol: "EUR/USD", price: 1.1000, qty: 50 },
-//   { id: 2, symbol: "USD/JPY", price: 145.20, qty: 30 },
-//   { id: 3, symbol: "GBP/USD", price: 1.2500, qty: 20 },
-//   { id: 4, symbol: "AUD/USD", price: 0.6800, qty: 40 }
-// ];
-
-// const listDiv = document.getElementById('instrumentList');
-
-// // Simula actualización de precios aleatorios
-// function actualizarPrecios() {
-//   instrumentos.forEach(inst => {
-//     let variacion = (Math.random() - 0.5) / 100; // variación pequeña
-//     inst.price = (parseFloat(inst.price) + variacion).toFixed(5);
-//   });
-//   mostrarInstrumentos();
-// }
-
-// // Renderizar tabla dinámica con Bootstrap
-// function mostrarInstrumentos() {
-//   let html = `
-//     <table class="table table-striped table-bordered align-middle">
-//       <thead class="table-primary">
-//         <tr>
-//           <th>Instrumento</th>
-//           <th>Precio</th>
-//           <th>Cantidad</th>
-//           <th>Precio Objetivo</th>
-//           <th>Mi Cantidad</th>
-//           <th>Operación</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//   `;
-//   instrumentos.forEach(inst => {
-//     html += `
-//       <tr>
-//         <td>${inst.symbol}</td>
-//         <td>${inst.price}</td>
-//         <td>${inst.qty}</td>
-//         <td><input type="number" step="0.0001" class="form-control" placeholder="Target"></td>
-//         <td><input type="number" class="form-control" placeholder="Cantidad"></td>
-//         <td>
-//           <select class="form-select">
-//             <option value="buy">Buy</option>
-//             <option value="sell">Sell</option>
-//           </select>
-//         </td>
-//       </tr>
-//     `;
-//   });
-//   html += `
-//       </tbody>
-//     </table>
-//   `;
-//   listDiv.innerHTML = html;
-// }
-
-// // Inicialización
-// mostrarInstrumentos();
-// setInterval(actualizarPrecios, 1000);
-
-// // Botón central (ejemplo, luego se conecta al WS)
-// document.getElementById('sendBtn').onclick = () => {
-//   alert("Aquí luego enviamos las configuraciones por WebSocket 🚀");
-// };

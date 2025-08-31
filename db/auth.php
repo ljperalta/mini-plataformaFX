@@ -1,7 +1,7 @@
 <?php
 session_start();
-
-$mysqli = new mysqli("localhost", "root", "", "neix");
+$config = include '../env.php';
+$mysqli = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
 
 if ($mysqli->connect_error) {
     die("Error de conexión: " . $mysqli->connect_error);

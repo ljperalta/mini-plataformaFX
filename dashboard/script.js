@@ -109,6 +109,7 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
     console.log("Operación enviada:", operation);
   } else {
     console.warn("WebSocket no conectado. No se envió la operación.");
+    mostrarToast("❌ No se envió la operación.", "danger");
   }
   
 });

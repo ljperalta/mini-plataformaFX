@@ -27,10 +27,10 @@ class MessageHandler implements MessageComponentInterface {
             $from->send($error);
             return;
         }
-        if (!isset($data['divisa']) || !isset($data['precio_objetivo']) || !isset($data['cantidad'])) {
+        if ($data['precio_objetivo'] <= 0 || $data['cantidad'] <= 0) {
             $error = json_encode([
                 "type" => "ERROR",
-                "message" => "Faltan parámetros requeridos (divisa, precio objetivo o cantidad)",
+                "message" => "Parámetros inválidos (precio objetivo o cantidad)",
                 "timestamp" => time()
             ]);
             $from->send($error);

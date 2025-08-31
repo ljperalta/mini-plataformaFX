@@ -8,7 +8,7 @@ socket.onmessage = (event) => {
   const operation = JSON.parse(event.data);
 
   if (operation.type === "ACK") {
-    console.log("ACK recibido:", operation);
+    //console.log("ACK recibido:", operation);
     mostrarToast("✅ " + operation.message, "success");
   } else if (operation.type === "ERROR") {
     mostrarToast("❌ " + operation.message, "danger");
@@ -106,7 +106,7 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
 
   if (socket.readyState === WebSocket.OPEN) {
     socket.send(JSON.stringify(operation));
-    console.log("Operación enviada:", operation);
+    //console.log("Operación enviada:", operation);
   } else {
     console.warn("WebSocket no conectado. No se envió la operación.");
     mostrarToast("❌ No se envió la operación.", "danger");

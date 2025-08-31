@@ -9,6 +9,9 @@ socket.onmessage = (event) => {
 
   if (operation.type === "ACK") {
     console.log("ACK recibido:", operation);
+    mostrarToast("✅ " + operation.message, "success");
+  } else if (operation.type === "ERROR") {
+    mostrarToast("❌ " + operation.message, "danger");
   } else {
     const operationsLog = document.getElementById('operationsLog');
     const logEntry = document.createElement("div");
@@ -24,6 +27,7 @@ socket.onerror = (error) => {
 
 socket.onclose = () => {
   console.log("Conexion cerrada");
+  mostrarToast("Conexión con WebSocket cerrada", "warning");
 };
 // Simulacion de instrumentos FX
 const instrumentos = [
@@ -108,6 +112,16 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
   
 });
 
+function mostrarToast(msg, type="primary") {
+    const toastEl = document.getElementById('liveToast');
+    const toastBody = document.getElementById('toastMessage');
+
+    toastEl.className = `toast align-items-center text-bg-${type} border-0`;
+    toastBody.innerText = msg;
+
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
+}
 
 
 // const instrumentos = [

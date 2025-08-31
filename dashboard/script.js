@@ -1,3 +1,20 @@
+let socket = new WebSocket("ws://localhost:8080");
+
+socket.onopen = () => {
+  console.log("Conectado ...");
+};
+
+socket.onmessage = (event) => {
+  console.log("Mensaje desde el servidor:", event.data);
+};
+
+socket.onerror = (error) => {
+  console.error("Error WebSocket:", error);
+};
+
+socket.onclose = () => {
+  console.log("Conexion cerrada");
+};
 // Simulacion de instrumentos FX
 const instrumentos = [
   { id: 1, symbol: "EUR/USD", price: 1.1000, qty: 50 },
@@ -78,11 +95,12 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
   } else {
     console.warn("WebSocket no conectado. No se envió la operación.");
   }
-  console.log("Operación preparada:", operation);
-  const logEntry = document.createElement("div");
-  logEntry.className = "alert alert-secondary py-2 mb-2";
-  logEntry.innerHTML = `<strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
-  operationsLog.prepend(logEntry);
+  //console.log("data recib:", event.data);
+  // console.log("Operación preparada:", operation);
+  // const logEntry = document.createElement("div");
+  // logEntry.className = "alert alert-secondary py-2 mb-2";
+  // logEntry.innerHTML = `<strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
+  // operationsLog.prepend(logEntry);
 });
 
 

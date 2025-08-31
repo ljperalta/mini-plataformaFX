@@ -78,7 +78,7 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
   } else {
     console.warn("WebSocket no conectado. No se envió la operación.");
   }
-
+  console.log("Operación preparada:", operation);
   const logEntry = document.createElement("div");
   logEntry.className = "alert alert-secondary py-2 mb-2";
   logEntry.innerHTML = `<strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;

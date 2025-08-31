@@ -65,10 +65,10 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
   e.preventDefault();
   
   const operation = {
-    symbol: select.value,
-    target: document.getElementById("targetPrice").value,
-    qty: document.getElementById("quantity").value,
-    side: document.getElementById("operationType").value,
+    divisa: select.value,
+    precio_objetivo: document.getElementById("targetPrice").value,
+    cantidad: document.getElementById("quantity").value,
+    operacion: document.getElementById("operationType").value,
     timestamp: new Date().toISOString()
   };
 

@@ -17,21 +17,18 @@ class MessageHandler implements MessageComponentInterface {
     public function onMessage(ConnectionInterface $from, $msg) {
         echo "Mensaje recibido de {$from->resourceId}: $msg\n";
 
-        // 🔹 Aquí puedes guardar en la DB si quieres
         $data = json_decode($msg, true);
 
         if ($data) {
-            // Guardar en DB (ejemplo básico con PDO)
             try {
-                $pdo = new PDO("mysql:host=localhost;dbname=neix;charset=utf8", "root", "");
-                $stmt = $pdo->prepare("INSERT INTO orders (user, symbol, side, qty, target, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
-                $stmt->execute([$data['user'], $data['symbol'], $data['side'], $data['qty'], $data['target']]);
+                //$pdo = new PDO("mysql:host=localhost;dbname=neix;charset=utf8", "root", "");
+                //$stmt = $pdo->prepare("INSERT INTO orders (user, divisa, operacion, cantidad, precio_objetivo, fecha) VALUES (?, ?, ?, ?, ?, NOW())");
+                //$stmt->execute([$data['user'], $data['divisa'], $data['operacion'], $data['cantidad'], $data['precio_objetivo']]);
             } catch (Exception $e) {
                 echo "Error DB: " . $e->getMessage() . "\n";
             }
         }
 
-        // 🔹 Reenviar a todos los clientes
         foreach ($this->clients as $client) {
             $client->send($msg);
         }

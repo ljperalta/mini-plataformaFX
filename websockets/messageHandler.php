@@ -17,18 +17,6 @@ class MessageHandler implements MessageComponentInterface {
     public function onMessage(ConnectionInterface $from, $msg) {
         echo "Mensaje recibido de {$from->resourceId}: $msg\n";
 
-        //$data = json_decode($msg, true);
-
-        // if ($data) {
-        //     try {
-        //         //$pdo = new PDO("mysql:host=localhost;dbname=neix;charset=utf8", "root", "");
-        //         //$stmt = $pdo->prepare("INSERT INTO orders (user, divisa, operacion, cantidad, precio_objetivo, fecha) VALUES (?, ?, ?, ?, ?, NOW())");
-        //         //$stmt->execute([$data['user'], $data['divisa'], $data['operacion'], $data['cantidad'], $data['precio_objetivo']]);
-        //     } catch (Exception $e) {
-        //         echo "Error DB: " . $e->getMessage() . "\n";
-        //     }
-        // }
-
         foreach ($this->clients as $client) {
             $client->send($msg);
         }

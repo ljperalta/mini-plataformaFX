@@ -4,16 +4,18 @@ socket.onopen = () => {
   console.log("Conectado ...");
 };
 
-socket.onmessage = (event) => {
-  //console.log("Mensaje desde el servidor:", event.data);
-  
-  const operationsLog = document.getElementById('operationsLog');
+socket.onmessage = (event) => {  
   const operation = JSON.parse(event.data);
-  //console.log("Operacion nueva:", operation);
-  const logEntry = document.createElement("div");
-  logEntry.className = "alert alert-secondary py-2 mb-2";
-  logEntry.innerHTML = `<strong>${operation.user}</strong><br><strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
-  operationsLog.prepend(logEntry);
+
+  if (operation.type === "ACK") {
+    console.log("ACK recibido:", operation);
+  } else {
+    const operationsLog = document.getElementById('operationsLog');
+    const logEntry = document.createElement("div");
+    logEntry.className = "alert alert-secondary py-2 mb-2";
+    logEntry.innerHTML = `<strong>${operation.user}</strong><br><strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
+    operationsLog.prepend(logEntry);
+  }
 };
 
 socket.onerror = (error) => {

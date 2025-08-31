@@ -20,6 +20,14 @@ class MessageHandler implements MessageComponentInterface {
         foreach ($this->clients as $client) {
             $client->send($msg);
         }
+
+        $ack = json_encode([
+            "type" => "ACK",
+            "message" => "Operación recibida y transmitida",
+            "timestamp" => time()
+        ]);
+
+        $from->send($ack);
     }
 
     public function onClose(ConnectionInterface $conn) {

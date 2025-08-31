@@ -5,7 +5,15 @@ socket.onopen = () => {
 };
 
 socket.onmessage = (event) => {
-  console.log("Mensaje desde el servidor:", event.data);
+  //console.log("Mensaje desde el servidor:", event.data);
+  
+  const operationsLog = document.getElementById('operationsLog');
+  const operation = JSON.parse(event.data);
+  //console.log("Operacion nueva:", operation);
+  const logEntry = document.createElement("div");
+  logEntry.className = "alert alert-secondary py-2 mb-2";
+  logEntry.innerHTML = `<strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
+  operationsLog.prepend(logEntry);
 };
 
 socket.onerror = (error) => {
@@ -25,7 +33,6 @@ const instrumentos = [
 
 const listDiv = document.getElementById('instrumentList');
 const select = document.getElementById('instrumentSelect');
-const operationsLog = document.getElementById('operationsLog');
 
 function renderTabla() {
   let html = `
@@ -95,12 +102,7 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
   } else {
     console.warn("WebSocket no conectado. No se envió la operación.");
   }
-  //console.log("data recib:", event.data);
-  // console.log("Operación preparada:", operation);
-  // const logEntry = document.createElement("div");
-  // logEntry.className = "alert alert-secondary py-2 mb-2";
-  // logEntry.innerHTML = `<strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
-  // operationsLog.prepend(logEntry);
+  
 });
 
 

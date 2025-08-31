@@ -12,7 +12,7 @@ socket.onmessage = (event) => {
   //console.log("Operacion nueva:", operation);
   const logEntry = document.createElement("div");
   logEntry.className = "alert alert-secondary py-2 mb-2";
-  logEntry.innerHTML = `<strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
+  logEntry.innerHTML = `<strong>${operation.user}</strong><br><strong>${operation.operacion.toUpperCase()}</strong> ${operation.cantidad} ${operation.divisa} @ ${operation.precio_objetivo} <br><small>${operation.timestamp}</small>`;
   operationsLog.prepend(logEntry);
 };
 
@@ -89,6 +89,7 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
   e.preventDefault();
   
   const operation = {
+    user: currentUser,
     divisa: select.value,
     precio_objetivo: document.getElementById("targetPrice").value,
     cantidad: document.getElementById("quantity").value,

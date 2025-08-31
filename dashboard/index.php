@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -57,6 +58,9 @@
     </div>
   </div>
 
+  <script>
+    const currentUser = "<?= $_SESSION['username'] ?>";
+  </script>
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

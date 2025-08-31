@@ -23,6 +23,7 @@ socket.onmessage = (event) => {
 
 socket.onerror = (error) => {
   console.error("Error WebSocket:", error);
+  mostrarToast("Error en la conexión WebSocket", "danger");
 };
 
 socket.onclose = () => {

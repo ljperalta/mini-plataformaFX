@@ -27,9 +27,7 @@ class MessageHandler implements MessageComponentInterface {
             $from->send($error);
             return;
         }
-
         if (!isset($data['divisa']) || !isset($data['precio_objetivo']) || !isset($data['cantidad'])) {
-            print_r($data);
             $error = json_encode([
                 "type" => "ERROR",
                 "message" => "Faltan parámetros requeridos (divisa, precio objetivo o cantidad)",

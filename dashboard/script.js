@@ -7,10 +7,10 @@ socket.onopen = () => {
 socket.onmessage = (event) => {  
   const operation = JSON.parse(event.data);
 
-  if (operation.type === "ACK") {
-    //console.log("ACK recibido:", operation);
+  if(operation.type === "ACK") {
     mostrarToast("✅ " + operation.message, "success");
-  } else if (operation.type === "ERROR") {
+    addInfo("Operación recibida");
+  }else if (operation.type === "ERROR") {
     mostrarToast("❌ " + operation.message, "danger");
   } else {
     const operationsLog = document.getElementById('operationsLog');
@@ -40,6 +40,7 @@ const instrumentos = [
 
 const listDiv = document.getElementById('instrumentList');
 const select = document.getElementById('instrumentSelect');
+const infoLog = document.getElementById("infoLog");
 
 function renderTabla() {
   let html = `
@@ -106,7 +107,6 @@ document.getElementById("operationForm").addEventListener("submit", function(e){
 
   if (socket.readyState === WebSocket.OPEN) {
     socket.send(JSON.stringify(operation));
-    //console.log("Operación enviada:", operation);
   } else {
     console.warn("WebSocket no conectado. No se envió la operación.");
     mostrarToast("❌ No se envió la operación.", "danger");
@@ -123,4 +123,14 @@ function mostrarToast(msg, type="primary") {
 
     const toast = new bootstrap.Toast(toastEl);
     toast.show();
+}
+
+function addInfo(message) {
+  if (infoLog.querySelector("p")) {
+    infoLog.innerHTML = "";
+  }
+  const div = document.createElement("div");
+  div.className = "text-muted small border-bottom py-1";
+  div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+  infoLog.prepend(div);
 }
